@@ -27,3 +27,22 @@ Low-field MRI has gained increasing attention as a cost-effective and portable a
 - ✅ NAGNet with an Adaptive Noise Awareness (ANA) branch that explicitly estimates noise maps.
 - ✅ State‑of‑the‑art performance across synthetic and real benchmarks.
 - ✅ Strong generalisation to unseen field strengths (0.05 T, 0.1 T, 0.35 T) and different anatomical regions.
+- 
+## 📂 Data Availability – **Open for Research**
+
+**This is a core contribution of our work.** We are releasing the real‑world datasets that enable fair and reproducible benchmarking in low‑field MRI enhancement:
+
+- **PriReL‑0.1 / PriReL‑0.35** – Real clinical brain scans acquired at 0.1 T and 0.35 T, together with **high‑field (1.5 T) references** from the same subjects (anatomically aligned but not perfectly registered). This is the **first publicly available** cross‑field paired dataset of its kind.
+
+
+> **Data download** – The curated datasets will be uploaded to a public repository (link to be provided upon paper acceptance). Usage is restricted to **non‑commercial research purposes**; a detailed data use agreement will accompany the release.
+
+## 🚀 Key Features
+
+### 1. Measurement‑Consistent k‑Space Synthesis
+
+Unlike image‑domain noise addition, our pipeline:
+
+- Estimates noise variance from the **high‑frequency annular region** of real low‑field k‑space.
+- Injects **independent Gaussian noise** into real and imaginary components.
+- Preserves the complex‑valued signal statistics, maintaining phase consistency.
