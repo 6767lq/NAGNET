@@ -46,3 +46,11 @@ Unlike image‑domain noise addition, our pipeline:
 - Estimates noise variance from the **high‑frequency annular region** of real low‑field k‑space.
 - Injects **independent Gaussian noise** into real and imaginary components.
 - Preserves the complex‑valued signal statistics, maintaining phase consistency.
+
+### 2. NAGNet Architecture
+NAGNet consists of two synergistic paths:
+
+Restoration backbone – reconstructs fine anatomical details.
+
+Adaptive Noise Awareness (ANA) branch – a lightweight encoder‑decoder that predicts a spatially‑varying noise map.
+The ANA branch is explicitly supervised by the known noise from k‑space synthesis, giving its output a clear physical meaning. It can be plugged into any restoration backbone to consistently improve denoising performance.
