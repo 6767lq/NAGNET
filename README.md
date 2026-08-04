@@ -1,7 +1,7 @@
 # NAGNet: Measurement-Consistent Low-Field MRI Enhancement via k-Space Noise Modeling
 
 <p align="center">
-  <img src="assets/fig_overview.png" alt="NAGNet Overview" width="800">
+  <img src="fig/fig2_01.png" alt="NAGNet Overview" width="800">
 </p>
 
 This repository contains the official PyTorch implementation of the paper:
