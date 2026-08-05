@@ -1,119 +1,107 @@
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/activating-more-pixels-in-image-super/image-super-resolution-on-set5-4x-upscaling)](https://paperswithcode.com/sota/image-super-resolution-on-set5-4x-upscaling?p=activating-more-pixels-in-image-super)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/activating-more-pixels-in-image-super/image-super-resolution-on-urban100-4x)](https://paperswithcode.com/sota/image-super-resolution-on-urban100-4x?p=activating-more-pixels-in-image-super)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/activating-more-pixels-in-image-super/image-super-resolution-on-set14-4x-upscaling)](https://paperswithcode.com/sota/image-super-resolution-on-set14-4x-upscaling?p=activating-more-pixels-in-image-super)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/activating-more-pixels-in-image-super/image-super-resolution-on-manga109-4x)](https://paperswithcode.com/sota/image-super-resolution-on-manga109-4x?p=activating-more-pixels-in-image-super)
+ # NAGNet: Measurement-Consistent Low-Field MRI Enhancement via k-Space Noise Modeling
 
-# HAT [![Replicate](https://replicate.com/cjwbw/hat/badge)](https://replicate.com/cjwbw/hat)
+<p align="center">
+  <img src="fig/fig2_01.png" alt="NAGNet Overview" width="800">
+</p>
 
-### Activating More Pixels in Image Super-Resolution Transformer [[Paper Link]](https://arxiv.org/abs/2205.04437)
-[Xiangyu Chen](https://chxy95.github.io/), [Xintao Wang](https://xinntao.github.io/), [Jiantao Zhou](https://www.fst.um.edu.mo/personal/jtzhou/), [Yu Qiao](https://scholar.google.com.hk/citations?user=gFtI-8QAAAAJ) and [Chao Dong](https://scholar.google.com.hk/citations?user=OSDCB0UAAAAJ&hl=zh-CN)
+This repository contains the official PyTorch implementation of the paper:
 
-### HAT: Hybrid Attention Transformer for Image Restoration [[Paper Link]](https://arxiv.org/abs/2309.05239)
-[Xiangyu Chen](https://chxy95.github.io/), [Xintao Wang](https://xinntao.github.io/), [Wenlong Zhang](https://wenlongzhang0517.github.io/), [Xiangtao Kong](https://xiangtaokong.github.io/), [Jiantao Zhou](https://www.fst.um.edu.mo/personal/jtzhou/), [Yu Qiao](https://scholar.google.com.hk/citations?user=gFtI-8QAAAAJ) and [Chao Dong](https://scholar.google.com.hk/citations?user=OSDCB0UAAAAJ&hl=zh-CN)
-
-## Updates
-- ✅ 2022-05-09: Release the first version of the paper at Arxiv.
-- ✅ 2022-05-20: Release the codes, models and results of HAT.
-- ✅ 2022-08-29: Add a Replicate demo for SRx4.
-- ✅ 2022-09-25: Add the tile mode for inference with limited GPU memory.
-- ✅ 2022-11-24: Upload a GAN-based HAT model for **Real-World SR** (Real_HAT_GAN_SRx4.pth). 
-- ✅ 2023-03-19: Update paper to CVPR version. Small HAT models are added.
-- ✅ 2023-04-05: Upload the HAT-S codes, models and results. 
-- ✅ 2023-08-01: Upload another GAN model for sharper results (Real_HAT_GAN_SRx4_sharper.pth). 
-- ✅ 2023-08-01: Upload the training configs for the **Real-World GAN-based model**.
-- ✅ 2023-09-11: Release the extended version of the paper at [Arxiv](https://arxiv.org/abs/2309.05239).
-- **(To do)** Add the tile mode for Replicate demo. 
-- **(To do)** Update the Replicate demo for Real-World SR. 
-- **(To do)** Add HAT models for Multiple Image Restoration tasks. 
-
-## Overview
-<img src="https://raw.githubusercontent.com/chxy95/HAT/master/figures/Performance_comparison.png" width="600"/>
-
-**Benchmark results on SRx4 without ImageNet pretraining. Mulit-Adds are calculated for a 64x64 input.**
-| Model | Params(M) | Multi-Adds(G) | Set5 | Set14 | BSD100 | Urban100 | Manga109 |
-|-------|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
-| [SwinIR](https://github.com/JingyunLiang/SwinIR) |   11.9    | 53.6 | 32.92 | 29.09 | 27.92 | 27.45 | 32.03 |
-| HAT-S |   9.6    | 54.9 | 32.92 | 29.15 | 27.97 | 27.87 | 32.35 |
-| HAT |   20.8    | 102.4 | 33.04 | 29.23 | 28.00 | 27.97 | 32.48 |
-
-## Real-World SR Results
-**Note that:**
-- The default settings in the training configs (almost the same as Real-ESRGAN) are for training **Real_HAT_GAN_SRx4_sharper**.
-- **Real_HAT_GAN_SRx4** is trained using similar settings without USM the ground truth.
-- **Real_HAT_GAN_SRx4** would have better fidelity.
-- **Real_HAT_GAN_SRx4_sharper** would have better perceptual quality.
-
-**Results produced by** Real_HAT_GAN_SRx4_sharper.pth.
-
-<img src="https://raw.githubusercontent.com/chxy95/HAT/master/figures/Visual_Results.png" width="800"/>
-
-**Comparison with the state-of-the-art Real-SR methods.**
-
-<img src="https://raw.githubusercontent.com/chxy95/HAT/master/figures/Comparison.png" width="800"/>
-
-## Citations
-#### BibTeX
-
-    @InProceedings{chen2023activating,
-        author    = {Chen, Xiangyu and Wang, Xintao and Zhou, Jiantao and Qiao, Yu and Dong, Chao},
-        title     = {Activating More Pixels in Image Super-Resolution Transformer},
-        booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-        month     = {June},
-        year      = {2023},
-        pages     = {22367-22377}
-    }
-
-    @article{chen2023hat,
-      title={HAT: Hybrid Attention Transformer for Image Restoration},
-      author={Chen, Xiangyu and Wang, Xintao and Zhang, Wenlong and Kong, Xiangtao and Qiao, Yu and Zhou, Jiantao and Dong, Chao},
-      journal={arXiv preprint arXiv:2309.05239},
-      year={2023}
-    }
-
-## Environment
-- [PyTorch >= 1.7](https://pytorch.org/) **(Recommend **NOT** using torch 1.8!!! It would cause abnormal performance.)**
-- [BasicSR == 1.3.4.9](https://github.com/XPixelGroup/BasicSR/blob/master/INSTALL.md) 
-### Installation
-Install Pytorch first.
-Then,
-```
-pip install -r requirements.txt
-python setup.py develop
-```
-
-## How To Test
-
-Without implementing the codes, [chaiNNer](https://github.com/chaiNNer-org/chaiNNer) is a nice tool to run our models.
-
-Otherwise, 
-- Refer to `./options/test` for the configuration file of the model to be tested, and prepare the testing data and pretrained model.  
-- The pretrained models are available at
-[Google Drive](https://drive.google.com/drive/folders/1HpmReFfoUqUbnAOQ7rvOeNU3uf_m69w0?usp=sharing) or [Baidu Netdisk](https://pan.baidu.com/s/1u2r4Lc2_EEeQqra2-w85Xg) (access code: qyrl).  
-- Then run the following codes (taking `HAT_SRx4_ImageNet-pretrain.pth` as an example):
-```
-python hat/test.py -opt options/test/HAT_SRx4_ImageNet-pretrain.yml
-```
-The testing results will be saved in the `./results` folder.  
-
-- Refer to `./options/test/HAT_SRx4_ImageNet-LR.yml` for **inference** without the ground truth image.
-
-**Note that the tile mode is also provided for limited GPU memory when testing. You can modify the specific settings of the tile mode in your custom testing option by referring to `./options/test/HAT_tile_example.yml`.**
-
-## How To Train
-- Refer to `./options/train` for the configuration file of the model to train.
-- Preparation of training data can refer to [this page](https://github.com/XPixelGroup/BasicSR/blob/master/docs/DatasetPreparation.md). ImageNet dataset can be downloaded at the [official website](https://image-net.org/challenges/LSVRC/2012/2012-downloads.php).
-- The training command is like
-```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -m torch.distributed.launch --nproc_per_node=8 --master_port=4321 hat/train.py -opt options/train/train_HAT_SRx2_from_scratch.yml --launcher pytorch
-```
-- Note that the default batch size per gpu is 4, which will cost about 20G memory for each GPU.  
-
-The training logs and weights will be saved in the `./experiments` folder.
-
-## Results
-The inference results on benchmark datasets are available at
-[Google Drive](https://drive.google.com/drive/folders/1t2RdesqRVN7L6vCptneNRcpwZAo-Ub3L?usp=sharing) or [Baidu Netdisk](https://pan.baidu.com/s/1CQtLpty-KyZuqcSznHT_Zw) (access code: 63p5).
+> **Measurement-Consistent Low-Field MRI Enhancement via k-Space Noise Modeling**  
+> *Yutao Hu, Qi Liu, Tao Zhou, Ziru Li, Ping Liang, Jichang Zhang, Rongsheng Lu, Xiaojian Lou, Jianjun Zheng, Jian Yang, Yang Chen*  
 
 
-## Contact
-If you have any question, please email chxy95@gmail.com or join in the [Wechat group of BasicSR](https://github.com/XPixelGroup/BasicSR#-contact) to discuss with the authors.
+---
+
+## 📌 Abstract
+
+Low-field MRI has gained increasing attention as a cost-effective and portable alternative to high-field MRI. However, its inherently low magnetic field strength leads to reduced signal intensity and low SNR, resulting in severe image degradation. This work presents a **measurement‑consistent framework** that addresses three key aspects:
+
+- **Data Synthesis** – physics‑inspired k‑space noise modeling with independent real/imaginary Gaussian injection.
+- **Model Design** – a Noise‑Aware Guidance Network (NAGNet) with explicit spatially‑varying noise supervision.
+- **Evaluation** – a unified benchmark including real paired acquisitions from 0.1 T, 0.35 T and 1.5 T scanners.
+
+**Key contributions:**
+
+- ✅ Physics‑based k‑space synthesis that preserves Fourier phase coherence.
+- ✅ **Open‑release of real low‑field MRI datasets** (0.1 T, 0.35 T) with corresponding 1.5 T references from the same subjects.
+- ✅ NAGNet with an Adaptive Noise Awareness (ANA) branch that explicitly estimates noise maps.
+- ✅ State‑of‑the‑art performance across synthetic and real benchmarks.
+- ✅ Strong generalisation to unseen field strengths (0.05 T, 0.1 T, 0.35 T) and different anatomical regions.
+
+## 📂 Data Availability – **Open for Research**
+
+**This is a core contribution of our work.** We are releasing the real‑world datasets that enable fair and reproducible benchmarking in low‑field MRI enhancement:
+
+- **PriReL‑0.1 / PriReL‑0.35** – Real clinical brain scans acquired at 0.1 T and 0.35 T, together with **high‑field (1.5 T) references** from the same subjects (anatomically aligned but not perfectly registered). This is the **first publicly available** cross‑field paired dataset of its kind.
+
+
+> **Data download** – The curated datasets will be uploaded to a public repository (link to be provided upon paper acceptance). Usage is restricted to **non‑commercial research purposes**; a detailed data use agreement will accompany the release.
+
+## 🚀 Key Features
+
+### 1. Measurement‑Consistent k‑Space Synthesis
+
+Unlike image‑domain noise addition, our pipeline:
+
+- Estimates noise variance from the **high‑frequency annular region** of real low‑field k‑space.
+- Injects **independent Gaussian noise** into real and imaginary components.
+- Preserves the complex‑valued signal statistics, maintaining phase consistency.
+- 
+📊 Results (as Reported in the Paper)
+Quantitative Comparison (trained on PriSynL)
+### Table 1: Quantitative Comparison (trained on PriSynL)
+| Method | GN(im)  FID | GN(im)  LPIPS | IQT(im)  FID | IQT(im) LPIPS | Rician(im) FID | Rician(im) LPIPS | NC-χ²(im) FID | NC-χ²(im) LPIPS | GN(k-u)  FID | GN(k-u) LPIPS | Ours (k, real-imag, separated) FID | Ours (k, real-imag, separated) LPIPS |
+|--------|------------------|--------------------|------------------|--------------------|----------------|------------------|---------------|------------------|------------------|--------------------|--------------------------------------|----------------------------------------|
+| SWINIR  | 190.65 | 50.07 | 188.96 | 48.88 | 189.47 | 49.29 | 201.55 | 51.03 | 154.66 | 46.96 | 149.05 (-5.61) | 46.56 (-0.40) |
+| HAT  | 184.69 | 49.17 | 180.70 | 49.92 | 194.65 | 50.06 | 213.65 | 50.69 | 168.38 | 48.55 | 161.28 (-7.10) | 47.71 (-0.81) |
+| RDDM | 179.66 | 45.01 | 169.57 | 43.28 | 181.76 | 43.12 | 230.85 | 48.78 | 165.74 | 41.83 | 159.32 (-6.42) | 40.86 (-0.97) |
+| NAGNet | 170.14 | 48.82 | 163.46 | 47.35 | 153.22 | 45.58 | 182.71 | 47.87 | 143.11 | 45.67 | 126.15 (-16.96) | 44.73 (-0.94) |
+
+### 2. NAGNet Architecture
+NAGNet consists of two synergistic paths:
+
+Restoration backbone – reconstructs fine anatomical details.
+
+Adaptive Noise Awareness (ANA) branch – a lightweight encoder‑decoder that predicts a spatially‑varying noise map.
+The ANA branch is explicitly supervised by the known noise from k‑space synthesis, giving its output a clear physical meaning. It can be plugged into any restoration backbone to consistently improve denoising performance.
+
+📊 Results (as Reported in the Paper)
+Quantitative Comparison (trained on PriSynL)
+### Table 2: Quantitative Comparison (trained on PriSynL)
+
+### Table 2: Quantitative Comparison (trained on PriSynL)
+
+| Method | PriSynL (PSNR↑/SSIM↑) | PriReL‑0.1 (LPIPS↓/FID↓) | PriReL‑0.35 (LPIPS↓/FID↓) |
+|--------|------------------------|--------------------------|----------------------------|
+| **General Restoration Model** | | | |
+| RCAN | 31.05 / 82.48 | 46.71 / 149.27 | 39.63 / 117.45 |
+| DBPN | 31.61 / 82.41 | 45.93 / 141.48 | 39.79 / 113.65 |
+| EDSR | 31.34 / 82.74 | 46.68 / 153.29 | 40.85 / 126.92 |
+| MSRGAN | 29.22 / 75.38 | 46.58 / 168.89 | 38.12 / 97.03 |
+| MSRResNET | 30.76 / 77.41 | 46.65 / 145.28 | 40.78 / 120.62 |
+| RIDNet | 31.87 / 83.44 | 46.15 / 148.66 | 38.49 / 97.51 |
+| SwinIR | 31.77 / 83.36 | 46.56 / 149.05 | 38.54 / 90.29 |
+| DAT | 29.02 / 77.46 | 50.37 / 198.81 | 42.06 / 138.61 |
+| HAT | 31.31 / 83.71 | 47.71 / 161.28 | 38.69 / 95.04 |
+| MPRNet | 31.71 / 87.28 | 46.90 / 165.01 | 38.17 / 88.29 |
+| SRFormer | 31.78 / 87.55 | 46.28 / 160.19 | 38.14 / 86.58 |
+| CTNET | 31.71 / 84.04 | 45.93 / 144.58 | 38.16 / 87.72 |
+| DRCT | 31.32 / 80.41 | 46.81 / 152.83 | 38.53 / 95.68 |
+| CLIPdn | 31.95 / 86.33 | 46.58 / 140.52 | 39.34 / 93.11 |
+| **Low-field MRI Enhancement Model** | | | |
+| CnDnCNN | 31.09 / 86.26 | 46.63 / 153.38 | 38.12 / 88.35 |
+| DiffDeuR | 32.09 / 91.61 | 45.03 / 161.51 | 37.89 / 89.07 |
+| SA-Cyclegan | 32.09 / 91.61 | 45.49 / 158.93 | 38.17 / 149.18 |
+| **NAGNet** | **32.31 / 91.95** | **44.73 / 126.15** | **37.51 / 76.87** |
+<p align="center">
+  <img src="fig/fig3_01.png" alt="results 0.1T" width="800">
+</p>
+Visual comparison of enhancement results across different methods. The images in first row and second row are selected
+from PriSynL and PriReL-0.1, respectively, which are synthesized and real 0.1T low-field MRI images. Green boxes indicate
+zoomed-in regions for detailed comparison. The rightmost column shows the corresponding 1.5T scan as a reference.
+<p align="center">
+  <img src="fig/fig4_01.png" alt="results 0.35T" width="800">
+</p>
+Visual comparison of enhancement results of 0.35T low-field MRI across different methods. Green boxes indicate
+zoomed-in regions for detailed comparison. The rightmost column shows the corresponding 1.5T scan as a reference.
+
