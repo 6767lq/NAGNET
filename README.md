@@ -1,4 +1,4 @@
-# NAGNet: Measurement-Consistent Low-Field MRI Enhancement via k-Space Noise Modeling
+ # NAGNet: Measurement-Consistent Low-Field MRI Enhancement via k-Space Noise Modeling
 
 <p align="center">
   <img src="fig/fig2_01.png" alt="NAGNet Overview" width="800">
@@ -93,5 +93,15 @@ Quantitative Comparison (trained on PriSynL)
 | DiffDeuR | 32.09 / 91.61 | 45.03 / 161.51 | 37.89 / 89.07 |
 | SA-Cyclegan | 32.09 / 91.61 | 45.49 / 158.93 | 38.17 / 149.18 |
 | **NAGNet** | **32.31 / 91.95** | **44.73 / 126.15** | **37.51 / 76.87** |
-
+<p align="center">
+  <img src="fig/fig3_01.png" alt="results 0.1T" width="800">
+</p>
+Visual comparison of enhancement results across different methods. The images in first row and second row are selected
+from PriSynL and PriReL-0.1, respectively, which are synthesized and real 0.1T low-field MRI images. Green boxes indicate
+zoomed-in regions for detailed comparison. The rightmost column shows the corresponding 1.5T scan as a reference.
+<p align="center">
+  <img src="fig/fig4_01.png" alt="results 0.35T" width="800">
+</p>
+Visual comparison of enhancement results of 0.35T low-field MRI across different methods. Green boxes indicate
+zoomed-in regions for detailed comparison. The rightmost column shows the corresponding 1.5T scan as a reference.
 
