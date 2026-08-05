@@ -1,0 +1,122 @@
+# general settings
+name: trainNAGNET
+model_type: NAGNETModel
+scale: 4
+num_gpu: auto
+manual_seed: 0
+
+# dataset and data loader settings
+
+datasets:
+  train:
+
+    name: ImageNet
+    type: ImageNetPairedDataset
+    dataroot_gt: F:\xingaoyishuju\head_noise\datset\head-png
+    dataroot_lq: F:\xingaoyishuju\head_noise\datset\ours_xgy
+    meta_info_file: hat/data/meta_info/meta_info_ImageNet_GT.txt
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+
+    gt_size: 128
+    use_hflip: true
+    use_rot: true
+
+    # data loader
+    num_worker_per_gpu: 2
+    batch_size_per_gpu: 1
+    dataset_enlarge_ratio: 1
+    prefetch_mode: ~
+
+  val:
+    name: Set5
+    type: ImageNetPairedDataset
+#
+    dataroot_gt: F:\val\xingaoyi\clean
+    dataroot_lq: F:\val\xingaoyi\noise2
+
+    io_backend:
+      type: disk
+
+
+# network structures
+network_g:
+  type: NAGNET
+  upscale: 2
+  in_chans: 1
+  img_size: 128
+  window_size: 8
+  compress_ratio: 3
+  squeeze_factor: 30
+  conv_scale: 0.01
+  overlap_ratio: 0.5
+  img_range: 1.
+  depths: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+  embed_dim: 180
+  num_heads: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+
+  mlp_ratio: 2
+  upsampler: 'pixelshuffle'
+  resi_connection: '1conv'
+
+# path
+path:
+
+  pretrain_network_g: ~
+  strict_load_g: true
+  resume_state: ~
+# training settings
+train:
+  ema_decay: 0.999
+  optim_g:
+    type: Adam
+    lr: !!float 1e-4
+    weight_decay: 0
+    betas: [0.9, 0.99]
+
+  scheduler:
+    type: MultiStepLR
+    milestones: [300000, 500000, 650000, 700000, 750000]
+    gamma: 0.5
+
+  total_iter: 800000
+  warmup_iter: -1  # no warm up
+
+  # losses
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+
+# validation settings
+val:
+  val_freq: 4000
+  save_img: true
+  pbar: False
+
+  metrics:
+    psnr:
+      type: calculate_psnr
+      crop_border: 2
+      test_y_channel: true
+      better: higher  # the higher, the better. Default: higher
+    ssim:
+      type: calculate_ssim
+      crop_border: 2
+      test_y_channel: true
+      better: higher  # the higher, the better. Default: higher
+
+# logging settings
+logger:
+  print_freq: 100
+  save_checkpoint_freq: 4000
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500

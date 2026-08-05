@@ -1,0 +1,84 @@
+name: test_fastmir_dat
+model_type: SRModel
+scale: 4
+num_gpu: auto
+manual_seed: 0
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: Set5
+    type: ImageNetPairedDataset2c
+    dataroot_gt: ~
+    dataroot_lq: ~
+
+    io_backend:
+      type: disk
+
+#  test_2:  # the 2nd test dataset
+#     name: Set14
+#     type:  ImageNetPairedDataset2c
+#     dataroot_gt: D:\lq\20241011
+#     dataroot_lq: D:\lq\20241011
+#     io_backend:
+#       type: disk
+
+  # test_3:
+  #   name: Urban100
+  #   type: PairedImageDataset
+  #   dataroot_gt: ./datasets/urban100/GTmod2
+  #   dataroot_lq: ./datasets/urban100/LRbicx2
+  #   io_backend:
+  #     type: disk
+
+  # test_4:
+  #    name: BSDS100
+  #    type: PairedImageDataset
+  #    dataroot_gt: ./datasets/BSDS100/GTmod2
+  #    dataroot_lq: ./datasets/BSDS100/LRbicx2
+  #    io_backend:
+  #      type: disk
+
+  # test_5:
+  #     name: Manga109
+  #     type: PairedImageDataset
+  #     dataroot_gt: ./datasets/manga109/GTmod2
+  #     dataroot_lq: ./datasets/manga109/LRbicx2
+  #     io_backend:
+  #       type: disk
+
+# network structures
+network_g:
+  type: DAT
+  upscale: 2
+  in_chans: 1
+  img_size: 64
+  img_range: 1.
+  split_size: [8,32]
+  depth: [6,6,6,6,6,6]
+  embed_dim: 180
+  num_heads: [6,6,6,6,6,6]
+  expansion_factor: 2
+  resi_connection: '1conv'
+
+
+
+# path
+path:
+
+  pretrain_network_g: ~
+  param_key_g: 'params_ema'
+
+# validation settings
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 2
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 2
+      test_y_channel: true

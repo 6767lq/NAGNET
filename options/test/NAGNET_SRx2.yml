@@ -1,0 +1,64 @@
+name: HAT-L_fenzhi(0.66-1.5)
+model_type: HATModel
+scale: 2
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: Set5
+    type: ImageNetPairedDataset2c
+    dataroot_gt: F:\xingaoyishuju\duiying\0.1_2
+    dataroot_lq: F:\xingaoyishuju\duiying\0.1_2
+
+    io_backend:
+      type: disk
+
+
+
+
+
+# network structures
+network_g:
+  type: NAGNET
+  upscale: 2
+  in_chans: 1
+  img_size: 128
+  window_size: 8
+  compress_ratio: 3
+  squeeze_factor: 30
+  conv_scale: 0.01
+  overlap_ratio: 0.5
+  img_range: 1.
+  depths: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+  embed_dim: 180
+  num_heads: [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+#  depths: [ 6, 6, 6, 6, 6  ]
+#  embed_dim: 180
+#  num_heads: [ 6, 6, 6, 6, 6 ]
+  mlp_ratio: 2
+  upsampler: 'pixelshuffle'
+  resi_connection: '1conv'
+
+
+# path
+path:
+
+  pretrain_network_g: ~
+
+  param_key_g: 'params_ema'
+
+# validation settings
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 2
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 2
+      test_y_channel: true

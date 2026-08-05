@@ -1,0 +1,78 @@
+name: test_SRFormer_xgy_duibi_0.35
+suffix: ~  # add suffix to saved images
+model_type: SRModel
+scale: 2
+num_gpu: 2  # set num_gpu: 0 for cpu mode
+manual_seed: 0
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: Set5
+    type: ImageNetPairedDataset2c
+    dataroot_gt: F:\xingaoyishuju\duibi-0.35\0.35
+    dataroot_lq: F:\xingaoyishuju\duibi-0.35\0.35
+    #    dataroot_gt: F:\val\gt
+    #    dataroot_lq: F:\val\gt
+#    dataroot_gt: F:\20240925\8080P0000000053
+#    dataroot_lq: F:\20240925\8080P0000000053
+    io_backend:
+        type: disk
+  test_2: # the 2st test dataset
+    name: Set2
+    type: ImageNetPairedDataset2c
+    dataroot_gt: D:\lq\20241011
+    dataroot_lq: D:\lq\20241011
+    #    dataroot_gt: F:\val\gt
+    #    dataroot_lq: F:\val\gt
+#    dataroot_gt: F:\20240925\8080P0000000053
+#    dataroot_lq: F:\20240925\8080P0000000053
+    io_backend:
+        type: disk
+
+
+
+# network structures
+
+# network structures
+network_g:
+  type: SRFormer
+  upscale: 2
+  in_chans: 1
+  img_size: 128
+  window_size: 16
+  img_range: 1.
+  depths: [6, 6, 6, 6]
+  embed_dim: 60
+  num_heads: [6, 6, 6, 6]
+  mlp_ratio: 2
+  upsampler: 'pixelshuffledirect'
+  resi_connection: '1conv'
+
+
+save_img: false
+print_network: false
+
+# path
+path:
+  pretrain_network_g: F:\compared_mod\train_SRFormer_xinggaoyi\models\net_g_60000.pth
+  strict_load_g: true
+  param_key_g: params
+
+val:
+  save_img: true
+
+  suffix: ~
+
+
+  metrics:
+
+    psnr:
+
+      type: calculate_psnr
+      crop_border: 2
+      test_y_channel: true
+
+    ssim:
+      type: calculate_ssim
+      crop_border: 2
+      test_y_channel: true

@@ -1,0 +1,52 @@
+name: rcan
+model_type: SRModel
+scale: 4
+num_gpu: auto
+manual_seed: 0
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: Set5
+    type: ImageNetPairedDataset2c
+    dataroot_gt: ~
+    dataroot_lq: ~
+
+    io_backend:
+      type: disk
+
+
+network_g:
+  type: RCAN=
+  num_in_ch: 1
+  num_out_ch: 1
+  num_feat: 64
+  num_group: 10
+  num_block: 20
+  squeeze_factor: 16
+  upscale: 2
+  res_scale: 1
+  img_range: 255.
+  rgb_mean: [ 0.4488, 0.4371, 0.4040 ]
+
+# path
+path:
+
+  pretrain_network_g: ~
+
+
+  param_key_g: 'params_ema'
+
+# validation settings
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 2
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 2
+      test_y_channel: true

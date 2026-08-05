@@ -1,0 +1,85 @@
+name: test_dbpnfenzhi(0.5)
+model_type: SRModel
+scale: 4
+num_gpu: auto
+manual_seed: 0
+
+datasets:
+  test_1:  # the 1st test dataset
+    name: Set5
+    type: ImageNetPairedDataset2c
+    dataroot_gt: F:\xingaoyishuju\duiying\0.1_2
+    dataroot_lq: F:\xingaoyishuju\duiying\0.1_2
+#    dataroot_gt: F:\val\gt
+#    dataroot_lq: F:\val\gt
+#    dataroot_gt: F:\xingaoyishuju\20240925
+#    dataroot_lq: F:\xingaoyishuju\20240925
+#    dataroot_gt: F:\xingaoyishuju\2222
+#    dataroot_lq: F:\xingaoyishuju\2222
+    io_backend:
+      type: disk
+
+#  test_2:  # the 2nd test dataset
+#     name: Set14
+#     type:  ImageNetPairedDataset2c
+#     dataroot_gt: D:\lq\20241011
+#     dataroot_lq: D:\lq\20241011
+#     io_backend:
+#       type: disk
+
+  # test_3:
+  #   name: Urban100
+  #   type: PairedImageDataset
+  #   dataroot_gt: ./datasets/urban100/GTmod2
+  #   dataroot_lq: ./datasets/urban100/LRbicx2
+  #   io_backend:
+  #     type: disk
+
+  # test_4:
+  #    name: BSDS100
+  #    type: PairedImageDataset
+  #    dataroot_gt: ./datasets/BSDS100/GTmod2
+  #    dataroot_lq: ./datasets/BSDS100/LRbicx2
+  #    io_backend:
+  #      type: disk
+
+  # test_5:
+  #     name: Manga109
+  #     type: PairedImageDataset
+  #     dataroot_gt: ./datasets/manga109/GTmod2
+  #     dataroot_lq: ./datasets/manga109/LRbicx2
+  #     io_backend:
+  #       type: disk
+
+# network structures
+network_g:
+  type: DBPN_Net_fenzhi
+  num_channels: 1
+  base_filter: 64
+  feat: 256
+  num_stages: 7
+  scale_factor: 2
+
+
+
+# path
+path:
+#  pretrain_network_g: ./experiments/pretrained_models/HAT-L_SRx2_ImageNet-pretrain.pth
+#  pretrain_network_g: F:\HAT-equal-time\experiments\dbpn_xingaoyi_fenzhi\models\net_g_92000.pth
+  pretrain_network_g: F:\HAT-equal-time\experiments\dbpn_fenzhi(0.5)\models\net_g_16000.pth
+  param_key_g: 'params_ema'
+
+# validation settings
+val:
+  save_img: true
+  suffix: ~  # add suffix to saved images, if None, use exp name
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 2
+      test_y_channel: true
+    ssim:
+      type: calculate_ssim
+      crop_border: 2
+      test_y_channel: true

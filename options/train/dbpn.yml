@@ -1,0 +1,137 @@
+# general settings
+name: dbpn_or(0.5)
+model_type: SRModel
+scale: 2
+num_gpu: 1  # set num_gpu: 0 for cpu mode
+manual_seed: 10
+
+# dataset and data loader settings
+datasets:
+  train:
+#    name: DIV2K
+#    type: PairedImageDataset
+#    dataroot_gt: datasets/DIV2K/DIV2K_train_HR_sub
+#    dataroot_lq: datasets/DIV2K/DIV2K_train_LR_bicubic/X2_sub
+    name: ImageNet
+    type: ImageNetPairedDataset
+    #    dataroot_gt: datasets/ImageNet/GT
+#    dataroot_gt: F:\fastmri\crop
+#    dataroot_lq: F:\fastmri\crop
+#    dataroot_gt: F:\xinggaoyi
+#    dataroot_lq: F:\xinggaoyi
+    dataroot_gt: F:\xingaoyishuju\head_noise\datset\head-png
+    dataroot_lq: F:\xingaoyishuju\head_noise\datset\ours_xgy
+#    dataroot_target_t1: F:\xingaoyishuju\0.1T_SQ\t1
+#    dataroot_target_t2: F:\xingaoyishuju\0.1T_SQ\t2
+
+    # (for lmdb)
+    # dataroot_gt: datasets/DIV2K/DIV2K_train_HR_sub.lmdb
+    # dataroot_lq: datasets/DIV2K/DIV2K_train_LR_bicubic_X2_sub.lmdb
+    filename_tmpl: '{}'
+    io_backend:
+      type: disk
+      # (for lmdb)
+      # type: lmdb
+
+    gt_size: 256
+    use_hflip: true
+    use_rot: true
+
+    # data loader
+    num_worker_per_gpu: 1
+    batch_size_per_gpu: 1
+    dataset_enlarge_ratio: 100
+    prefetch_mode: ~
+
+  val:
+      name: Set5
+      type: ImageNetPairedDataset
+#      dataroot_gt: F:\xingaoyishuju\0.1T_squence_d\val2
+#      dataroot_lq: F:\xingaoyishuju\0.1T_squence_d\val2
+#      dataroot_target_t1: F:\xingaoyishuju\0.1T_SQ\t1
+#      dataroot_target_t2: F:\xingaoyishuju\0.1T_SQ\t2
+      dataroot_gt: F:\val\xingaoyi\clean
+      dataroot_lq: F:\val\xingaoyi\noise2
+
+      #    type: PairedImageDataset
+      #    dataroot_gt: datasets/Set5/GTmod12
+      #    dataroot_lq: datasets/Set5/LRbicx4
+      io_backend:
+        type: disk
+#    name: Set5
+#    type: PairedImageDataset
+#    dataroot_gt: datasets/Set5/GTmod12
+#    dataroot_lq: datasets/Set5/LRbicx2
+#    io_backend:
+#      type: disk
+
+
+# network structures
+network_g:
+  type: DBPN_Net
+  num_channels: 1
+  base_filter: 64
+  feat: 256
+  num_stages: 7
+  scale_factor: 2
+
+# path
+path:
+#  pretrain_network_g: F:\HAT-equal-time\experiments\dbpn_xingaoyi\models\net_g_104000.pth
+
+  pretrain_network_g: ~
+  strict_load_g: true
+  resume_state: ~
+
+# training settings
+train:
+  ema_decay: 0.999
+  optim_g:
+    type: Adam
+    lr: !!float 1e-4
+    weight_decay: 0
+    betas: [0.9, 0.99]
+
+  scheduler:
+    type: MultiStepLR
+    milestones: [200000]
+    gamma: 0.5
+
+  total_iter: 300000
+  warmup_iter: -1  # no warm up
+
+  # losses
+  pixel_opt:
+    type: L1Loss
+    loss_weight: 1.0
+    reduction: mean
+
+# validation settings
+val:
+  val_freq: 80000
+  save_img: true
+
+  metrics:
+    psnr: # metric name, can be arbitrary
+      type: calculate_psnr
+      crop_border: 2
+      test_y_channel: false
+    ssim:
+      type: calculate_ssim
+      crop_border: 2
+      test_y_channel: true
+      better: higher  # the higher, the better. Default: higher
+
+# logging settings
+logger:
+  print_freq: 100
+  save_checkpoint_freq: 4000
+  use_tb_logger: true
+  wandb:
+    project: ~
+    resume_id: ~
+
+# dist training settings
+dist_params:
+  backend: nccl
+  port: 29500
