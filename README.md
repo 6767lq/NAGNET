@@ -105,3 +105,9 @@ zoomed-in regions for detailed comparison. The rightmost column shows the corres
 Visual comparison of enhancement results of 0.35T low-field MRI across different methods. Green boxes indicate
 zoomed-in regions for detailed comparison. The rightmost column shows the corresponding 1.5T scan as a reference.
 
+## Environment
+### Installation
+```
+pip install -r requirements.txt
+python setup.py develop
+```
