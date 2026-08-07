@@ -37,6 +37,19 @@ Low-field MRI has gained increasing attention as a cost-effective and portable a
 
 > **Data download** – The curated datasets will be uploaded to a public repository (link to be provided upon paper acceptance). Usage is restricted to **non‑commercial research purposes**; a detailed data use agreement will accompany the release.
 
+
+## How to train
+Refer to ./options/train for the configuration file of the model to train.
+The training command is like
+```
+python NAGNET/train.py -opt options/train/train_NAGNET_SRx2.yml --launcher pytorch
+```
+
+
+
+
+
+
 ## 🚀 Key Features
 
 ### 1. Measurement‑Consistent k‑Space Synthesis
@@ -46,7 +59,7 @@ Unlike image‑domain noise addition, our pipeline:
 - Estimates noise variance from the **high‑frequency annular region** of real low‑field k‑space.
 - Injects **independent Gaussian noise** into real and imaginary components.
 - Preserves the complex‑valued signal statistics, maintaining phase consistency.
-- 
+
 📊 Results (as Reported in the Paper)
 Quantitative Comparison (trained on PriSynL)
 ### Table 1: Quantitative Comparison (trained on PriSynL)
@@ -74,9 +87,3 @@ python setup.py develop
 ```
 ##
 
-## How to train
-Refer to ./options/train for the configuration file of the model to train.
-The training command is like
-```
-python NAGNET/train.py -opt options/train/train_NAGNET_SRx2.yml --launcher pytorch
-```
