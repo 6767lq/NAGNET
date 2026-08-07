@@ -65,45 +65,6 @@ Restoration backbone – reconstructs fine anatomical details.
 Adaptive Noise Awareness (ANA) branch – a lightweight encoder‑decoder that predicts a spatially‑varying noise map.
 The ANA branch is explicitly supervised by the known noise from k‑space synthesis, giving its output a clear physical meaning. It can be plugged into any restoration backbone to consistently improve denoising performance.
 
-📊 Results (as Reported in the Paper)
-Quantitative Comparison (trained on PriSynL)
-### Table 2: Quantitative Comparison (trained on PriSynL)
-
-### Table 2: Quantitative Comparison (trained on PriSynL)
-
-| Method | PriSynL (PSNR↑/SSIM↑) | PriReL‑0.1 (LPIPS↓/FID↓) | PriReL‑0.35 (LPIPS↓/FID↓) |
-|--------|------------------------|--------------------------|----------------------------|
-| **General Restoration Model** | | | |
-| RCAN | 31.05 / 82.48 | 46.71 / 149.27 | 39.63 / 117.45 |
-| DBPN | 31.61 / 82.41 | 45.93 / 141.48 | 39.79 / 113.65 |
-| EDSR | 31.34 / 82.74 | 46.68 / 153.29 | 40.85 / 126.92 |
-| MSRGAN | 29.22 / 75.38 | 46.58 / 168.89 | 38.12 / 97.03 |
-| MSRResNET | 30.76 / 77.41 | 46.65 / 145.28 | 40.78 / 120.62 |
-| RIDNet | 31.87 / 83.44 | 46.15 / 148.66 | 38.49 / 97.51 |
-| SwinIR | 31.77 / 83.36 | 46.56 / 149.05 | 38.54 / 90.29 |
-| DAT | 29.02 / 77.46 | 50.37 / 198.81 | 42.06 / 138.61 |
-| HAT | 31.31 / 83.71 | 47.71 / 161.28 | 38.69 / 95.04 |
-| MPRNet | 31.71 / 87.28 | 46.90 / 165.01 | 38.17 / 88.29 |
-| SRFormer | 31.78 / 87.55 | 46.28 / 160.19 | 38.14 / 86.58 |
-| CTNET | 31.71 / 84.04 | 45.93 / 144.58 | 38.16 / 87.72 |
-| DRCT | 31.32 / 80.41 | 46.81 / 152.83 | 38.53 / 95.68 |
-| CLIPdn | 31.95 / 86.33 | 46.58 / 140.52 | 39.34 / 93.11 |
-| **Low-field MRI Enhancement Model** | | | |
-| CnDnCNN | 31.09 / 86.26 | 46.63 / 153.38 | 38.12 / 88.35 |
-| DiffDeuR | 32.09 / 91.61 | 45.03 / 161.51 | 37.89 / 89.07 |
-| SA-Cyclegan | 32.09 / 91.61 | 45.49 / 158.93 | 38.17 / 149.18 |
-| **NAGNet** | **32.31 / 91.95** | **44.73 / 126.15** | **37.51 / 76.87** |
-<p align="center">
-  <img src="fig/fig3_01.png" alt="results 0.1T" width="800">
-</p>
-Visual comparison of enhancement results across different methods. The images in first row and second row are selected
-from PriSynL and PriReL-0.1, respectively, which are synthesized and real 0.1T low-field MRI images. Green boxes indicate
-zoomed-in regions for detailed comparison. The rightmost column shows the corresponding 1.5T scan as a reference.
-<p align="center">
-  <img src="fig/fig4_01.png" alt="results 0.35T" width="800">
-</p>
-Visual comparison of enhancement results of 0.35T low-field MRI across different methods. Green boxes indicate
-zoomed-in regions for detailed comparison. The rightmost column shows the corresponding 1.5T scan as a reference.
 
 ## Environment
 ### Installation
@@ -117,5 +78,5 @@ python setup.py develop
 Refer to ./options/train for the configuration file of the model to train.
 The training command is like
 ```
-CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -m torch.distributed.launch --nproc_per_node=8 --master_port=4321 NAGNET/train.py -opt options/train/train_NAGNET_SRx2.yml --launcher pytorch
+python NAGNET/train.py -opt options/train/train_NAGNET_SRx2.yml --launcher pytorch
 ```
