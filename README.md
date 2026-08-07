@@ -47,6 +47,21 @@ python NAGNET/train.py -opt options/train/train_NAGNET_SRx2.yml --launcher pytor
 
 
 
+## 🧪 Noise Simulation: Quick Start
+
+If you have real raw k‑space data, then we provide two functions in NAGNet/data/simulation.py to generate realistic low‑field MRI data following our k‑space real‑imag separated approach.
+### Batch generation
+Use the command‑line script to generate a full dataset:
+
+```python NAGNET/data/generate_synthetic.py \
+    --high_field_dir /path/to/1.5T/data \
+    --real_ref_dir /path/to/0.1T/reference \
+    --output_dir ./data/PriSynL \
+    --num_slices 24000 \
+    --scale 0.5
+```
+If you do not have raw k‑space data and only have magnitude images, then you can use the simulation method provided in NAGNet/data/imagenet_paired_dataset.py instead.
+
 
 
 
