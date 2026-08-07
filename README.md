@@ -111,3 +111,11 @@ zoomed-in regions for detailed comparison. The rightmost column shows the corres
 pip install -r requirements.txt
 python setup.py develop
 ```
+##
+
+## How to train
+Refer to ./options/train for the configuration file of the model to train.
+The training command is like
+```
+CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 python -m torch.distributed.launch --nproc_per_node=8 --master_port=4321 NAGNET/train.py -opt options/train/train_NAGNET_SRx2.yml --launcher pytorch
+```
