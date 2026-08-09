@@ -46,7 +46,7 @@ The training command is like
 ```
 python NAGNET/train.py -opt options/train/train_NAGNET_SRx2.yml --launcher pytorch
 ```
-
+Before running the code, update the dataset paths in train_NAGNET_SRx2.yml and NAGNET_SRx2.yml so they match your local data locations.
 
 
 ## 🧪 Noise Simulation: Quick Start
@@ -63,8 +63,6 @@ Use the command‑line script to generate a full dataset:
     --scale 0.5
 ```
 If you do not have raw k‑space data and only have magnitude images, then you can use the simulation method provided in NAGNet/data/imagenet_paired_dataset.py instead.
-
-
 
 
 ## 🚀 Key Features
