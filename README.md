@@ -35,7 +35,9 @@ Low-field MRI has gained increasing attention as a cost-effective and portable a
 - **PriReL‑0.1 / PriReL‑0.35** – Real clinical brain scans acquired at 0.1 T and 0.35 T, together with **high‑field (1.5 T) references** from the same subjects (anatomically aligned but not perfectly registered). This is the **first publicly available** cross‑field paired dataset of its kind.
 
 
-> **Data download** – The curated datasets will be uploaded to a public repository (link to be provided upon paper acceptance). Usage is restricted to **non‑commercial research purposes**; a detailed data use agreement will accompany the release.
+> **Data download** – To obtain the dataset, please use the following Baidu Cloud link. The extraction code is 6979.
+https://pan.baidu.com/s/1SLa7e_V9jG0LbtsS4k-HVQ?pwd=6979
+
 
 
 ## How to train
