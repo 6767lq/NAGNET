@@ -49,6 +49,16 @@ python NAGNET/train.py -opt options/train/train_NAGNET_SRx2.yml --launcher pytor
 Before running the code, update the dataset paths in train_NAGNET_SRx2.yml and NAGNET_SRx2.yml so they match your local data locations.
 
 
+## How to test
+Refer to ./options/test for the configuration file of the model to train.
+The training command is like
+```
+python NAGNET/train.py -opt options/test/NAGNET_SRx2.yml --launcher pytorch
+```
+Before running the code, update the dataset paths in train_NAGNET_SRx2.yml and NAGNET_SRx2.yml so they match your local data locations.
+
+
+
 ## 🧪 Noise Simulation: Quick Start
 
 If you have real raw k‑space data, then we provide two functions in NAGNet/data/simulation.py to generate realistic low‑field MRI data following our k‑space real‑imag separated approach.
