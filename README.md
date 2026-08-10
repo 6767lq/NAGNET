@@ -66,7 +66,7 @@ If you have real raw k‑space data, then we provide two functions in NAGNet/dat
 Use the command‑line script to generate a full dataset:
 
 ```
-python NAGNET/data/generate_synthetic.py \
+python NAGNET/data/generate_synthetic.py 
     --high_field_dir /path/to/1.5T/data \
     --real_ref_dir /path/to/0.1T/reference \
     --output_dir ./data/PriSynL \
