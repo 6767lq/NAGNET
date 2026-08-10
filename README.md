@@ -75,33 +75,6 @@ Use the command‑line script to generate a full dataset:
 If you do not have raw k‑space data and only have magnitude images, then you can use the simulation method provided in NAGNet/data/imagenet_paired_dataset.py instead.
 
 
-## 🚀 Key Features
-
-### 1. Measurement‑Consistent k‑Space Synthesis
-
-Unlike image‑domain noise addition, our pipeline:
-
-- Estimates noise variance from the **high‑frequency annular region** of real low‑field k‑space.
-- Injects **independent Gaussian noise** into real and imaginary components.
-- Preserves the complex‑valued signal statistics, maintaining phase consistency.
-
-📊 Results (as Reported in the Paper)
-Quantitative Comparison (trained on PriSynL)
-### Table 1: Quantitative Comparison (trained on PriSynL)
-| Method | GN(im)  FID | GN(im)  LPIPS | IQT(im)  FID | IQT(im) LPIPS | Rician(im) FID | Rician(im) LPIPS | NC-χ²(im) FID | NC-χ²(im) LPIPS | GN(k-u)  FID | GN(k-u) LPIPS | Ours (k, real-imag, separated) FID | Ours (k, real-imag, separated) LPIPS |
-|--------|------------------|--------------------|------------------|--------------------|----------------|------------------|---------------|------------------|------------------|--------------------|--------------------------------------|----------------------------------------|
-| SWINIR  | 190.65 | 50.07 | 188.96 | 48.88 | 189.47 | 49.29 | 201.55 | 51.03 | 154.66 | 46.96 | 149.05 (-5.61) | 46.56 (-0.40) |
-| HAT  | 184.69 | 49.17 | 180.70 | 49.92 | 194.65 | 50.06 | 213.65 | 50.69 | 168.38 | 48.55 | 161.28 (-7.10) | 47.71 (-0.81) |
-| RDDM | 179.66 | 45.01 | 169.57 | 43.28 | 181.76 | 43.12 | 230.85 | 48.78 | 165.74 | 41.83 | 159.32 (-6.42) | 40.86 (-0.97) |
-| NAGNet | 170.14 | 48.82 | 163.46 | 47.35 | 153.22 | 45.58 | 182.71 | 47.87 | 143.11 | 45.67 | 126.15 (-16.96) | 44.73 (-0.94) |
-
-### 2. NAGNet Architecture
-NAGNet consists of two synergistic paths:
-
-Restoration backbone – reconstructs fine anatomical details.
-
-Adaptive Noise Awareness (ANA) branch – a lightweight encoder‑decoder that predicts a spatially‑varying noise map.
-The ANA branch is explicitly supervised by the known noise from k‑space synthesis, giving its output a clear physical meaning. It can be plugged into any restoration backbone to consistently improve denoising performance.
 
 
 ## Environment
